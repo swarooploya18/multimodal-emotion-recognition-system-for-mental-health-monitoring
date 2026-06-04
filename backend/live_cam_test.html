@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speech Test</title>
+</head>
+<body>
+
+<h2>🎤 Speech Emotion Test</h2>
+
+<button id="startBtn" onclick="startRecording()">Start Recording</button>
+<button id="stopBtn" onclick="stopRecording()" disabled>Stop Recording</button>
+
+<p id="speechResult">Speech Emotion: </p>
+
+<script>
+
+let mediaRecorder = null;
+let audioChunks = [];
+let isRecording = false;
+
+const startBtn = document.getElementById("startBtn");
+const stopBtn = document.getElementById("stopBtn");
+const resultText = document.getElementById("speechResult");
+
+async function startRecording() {
+
+    if (isRecording) {
+        console.log("Already recording. Ignoring click.");
+        return;
+    }
+
+    console.log("Recording started");
+    isRecording = true;
+
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+
+        console.log("Recording stopped");
+
+        stopBtn.disabled = true;
+
+        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+
+        const formData = new FormData();
+        formData.append("student_id", "student_001");
+        formData.append("file", audioBlob, "audio.webm");
+
+        try {
+
+            console.log("Sending to backend...");
+
+            const response = await fetch("http://127.0.0.1:8000/api/analyze-speech", {
+                method: "POST",
+                body: formData
+            });
+
+            console.log("Response received:", response.status);
+
+            const data = await response.json();
+
+            console.log("Backend data:", data);
+
+            resultText.innerText =
+                "Speech Emotion: " + data.analysis.emotion +
+                " (" + (data.analysis.confidence * 100).toFixed(2) + "%)";
+
+        } catch (err) {
+            console.error("Frontend error:", err);
+        }
+
+        // Reset state
+        isRecording = false;
+        startBtn.disabled = false;
+    };
+
+    mediaRecorder.start();
+}
+
+function stopRecording() {
+
+    if (!isRecording) {
+        console.log("Not recording. Ignoring stop.");
+        return;
+    }
+
+    console.log("Stop button clicked");
+    mediaRecorder.stop();
+}
+
+</script>
+
+</body>
+</html>

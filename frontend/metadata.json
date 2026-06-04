@@ -1,0 +1,9 @@
+
+{
+  "name": "SentientAI Emotion Hub",
+  "description": "A premium, high-performance emotion analysis dashboard integrating facial recognition, speech sentiment, text linguistics, and risk assessment.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
