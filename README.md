@@ -1,6 +1,4 @@
-!\[Python](https://img.shields.io/badge/Python-3.10-blue)
-!\[Status](https://img.shields.io/badge/Status-Completed-success)
-!\[License](https://img.shields.io/badge/License-MIT-green)# 🎭 Emotion Recognition System
+\# 🎭 Emotion Recognition System
 
 ## 📌 Overview
 
@@ -56,7 +54,7 @@ python -m venv venv
 ### 3️⃣ Activate environment
 
 ```bash
-venv\\Scripts\\activate   # Windows
+venv\\\\Scripts\\\\activate   # Windows
 ```
 
 ### 4️⃣ Install dependencies
@@ -109,7 +107,7 @@ Open `frontend/index.html` in browser
 
 ## 👨‍💻 Author
 
-**Akash P**
+**Loya Jyoti Swaroop**
 GitHub: https://github.com/Akashhh-p
 
 \---
