@@ -54,7 +54,7 @@ python -m venv venv
 ### 3️⃣ Activate environment
 
 ```bash
-venv\\\\Scripts\\\\activate   # Windows
+venv\\\\\\\\Scripts\\\\\\\\activate   # Windows
 ```
 
 ### 4️⃣ Install dependencies
@@ -108,7 +108,7 @@ Open `frontend/index.html` in browser
 ## 👨‍💻 Author
 
 **Loya Jyoti Swaroop**
-GitHub: https://github.com/Akashhh-p
+GitHub: https://github.com/swarooploya18
 
 \---
 
